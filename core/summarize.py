@@ -26,7 +26,12 @@ def summarize(transcript : str) -> str:
 
     map_prompt = ChatPromptTemplate.from_messages(
         [
-        ("system", "Summarize this portion of a meeting transcript concisely."),
+        (
+            "system",
+            "You are an expert meeting summarizer. Read the following portion of a meeting "
+            "transcript and write a concise, highly detailed summary capture all critical points, "
+            "key contexts, and specific facts discussed. Avoid generic statements."
+        ),
         ("human", "{text}"),
     ]
     )
@@ -43,8 +48,12 @@ def summarize(transcript : str) -> str:
         [
         (
             "system",
-            "You are an expert meeting summarizer. Combine these partial summaries "
-            "into one final professional meeting summary in bullet points.",
+            "You are an expert executive analyst. You are provided with several sequential partial "
+            "summaries of a meeting transcript. Synthesize these into a single, cohesive, "
+            "and professional meeting summary.\n\n"
+            "Format the summary cleanly using bullet points, grouping related points under clear, logical "
+            "subheadings if applicable. Ensure the output is readable, professional, and retains crucial "
+            "details, metrics, or contexts from the partial summaries.",
         ),
         ("human", "{text}"),
     ]
@@ -68,8 +77,10 @@ def generate_title(transcipt : str) -> str:
         ChatPromptTemplate.from_messages([
              (
                 "system",
-                "Based on the meeting transcript, generate a short professional meeting title "
-                "(max 8 words). Only return the title, nothing else.",
+                "You are an expert editor. Carefully analyze the beginning of the meeting transcript "
+                "and generate a short, professional, and engaging title (maximum 8 words) that accurately "
+                "captures the central theme or topic of the meeting. Return only the title text, with no "
+                "introductory text, quotes, or markdown formatting.",
             ),
             ("human", "{text}"),
         ])
