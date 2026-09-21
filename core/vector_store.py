@@ -47,7 +47,7 @@ def load_vector_store()->Chroma:
   embeddings=get_embeddings()
   vector_store=Chroma(
     collection_name=COLLECTION_NAME,
-    embedding_functions=embeddings,
+    embedding_function=embeddings,
     persist_directory=CHROMA_DIR
   )
   return vector_store
